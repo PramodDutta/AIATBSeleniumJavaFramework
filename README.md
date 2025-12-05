@@ -48,6 +48,9 @@
 
 ---
 
+<img width="3600" height="3972" alt="image" src="https://github.com/user-attachments/assets/ee4079b7-f789-4c6a-9df0-fc58762fcbb3" />
+
+
 ## 🏗 Architecture
 
 ```
@@ -599,4 +602,6 @@ If you find this project useful, please consider giving it a star! ⭐
 <p align="center">
   Made with ❤️ by <a href="https://thetestingacademy.com">The Testing Academy</a>
 </p>
+
+<img width="3600" height="2954" alt="image" src="https://github.com/user-attachments/assets/bec7ac92-225e-4592-a980-d07fc60878c5" />
 
