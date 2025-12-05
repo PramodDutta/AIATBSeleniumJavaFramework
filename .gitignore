@@ -1,0 +1,49 @@
+# Java
+target/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# Maven
+.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# Allure
+.allure/
+
+# Python
+ai-analysis/venv/
+ai-analysis/__pycache__/
+ai-analysis/src/__pycache__/
+ai-analysis/config/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Python generated reports
+ai-analysis/test_report.html
+ai-analysis/data/*.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Environment
+.env
+.env.local
+

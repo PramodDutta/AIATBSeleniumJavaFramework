@@ -1,0 +1,177 @@
+# =============================================================================
+# AI-Powered Test Automation Framework - Context Configuration
+# =============================================================================
+# Author: Pramod Dutta
+# Website: The Testing Academy (https://thetestingacademy.com)
+# 
+# This file contains all the context needed to recreate this project.
+# Use this as a reference or provide it to AI assistants to understand
+# the project structure and requirements.
+# =============================================================================
+
+project:
+  name: "AI-Powered Test Automation Framework"
+  description: "Selenium Java test automation with AI-powered failure analysis using local embeddings"
+  author: "Pramod Dutta"
+  website: "https://thetestingacademy.com"
+  repository: "https://github.com/pramods12/AIATBSeleniumJavaFramework"
+  license: "MIT"
+
+# =============================================================================
+# TECHNOLOGY STACK
+# =============================================================================
+stack:
+  java:
+    version: "17+"
+    build_tool: "Maven 3.8+"
+    test_framework: "TestNG 7.9.0"
+    automation: "Selenium 4.27.0"
+    reporting: "Allure TestNG 2.25.0"
+    logging: "Log4j2 2.22.0"
+    json: "Gson 2.10.1"
+    
+  python:
+    version: "3.9+"
+    web_framework: "FastAPI 0.104+"
+    dashboard: "Streamlit 1.50+"
+    embeddings: "sentence-transformers 2.2+"
+    vector_db: "qdrant-client 1.7+"
+    data: "pandas 2.1+"
+    visualization: "plotly 6.5+"
+
+# =============================================================================
+# PROJECT STRUCTURE
+# =============================================================================
+structure:
+  java_framework:
+    - path: "src/main/java/com/automation/pages/"
+      description: "Page Object Model classes"
+      files:
+        - "BasePage.java - Base class with common Selenium methods"
+        - "LoginPage.java - Login page elements and actions"
+        - "DashboardPage.java - Dashboard page after login"
+        
+    - path: "src/main/java/com/automation/listeners/"
+      description: "TestNG listeners"
+      files:
+        - "AllureScreenshotListener.java - Captures screenshots on test failure"
+        
+    - path: "src/main/java/com/automation/analytics/"
+      description: "Test analytics and logging"
+      files:
+        - "TestAnalyticsLogger.java - JSONL structured logging for AI analysis"
+        - "TestAnalyticsListener.java - TestNG listener for analytics"
+        
+    - path: "src/test/java/com/automation/base/"
+      description: "Base test configuration"
+      files:
+        - "BaseTest.java - WebDriver setup/teardown, common test config"
+        
+    - path: "src/test/java/com/automation/tests/"
+      description: "Test classes"
+      files:
+        - "LoginTest.java - Login functionality tests"
+
+  ai_analysis:
+    - path: "ai-analysis/config/"
+      description: "Configuration"
+      files:
+        - "settings.py - Paths, model config, thresholds"
+        
+    - path: "ai-analysis/src/"
+      description: "Core AI analysis modules"
+      files:
+        - "log_parser.py - Parses JSONL test logs"
+        - "embedding_service.py - Local AI embeddings (sentence-transformers)"
+        - "vector_store.py - Qdrant vector database operations"
+        - "analysis_service.py - Orchestrates analysis pipeline"
+        - "api.py - FastAPI REST endpoints"
+        
+    - path: "ai-analysis/"
+      description: "Entry points"
+      files:
+        - "main.py - CLI entry point"
+        - "dashboard.py - Streamlit dashboard"
+        - "requirements.txt - Python dependencies"
+
+# =============================================================================
+# KEY FEATURES
+# =============================================================================
+features:
+  test_framework:
+    - name: "Page Object Model"
+      description: "Clean separation of test logic and page elements"
+      
+    - name: "Automatic Screenshots"
+      description: "Captures screenshot, page source, and URL on test failure"
+      implementation: "AllureScreenshotListener using ITestListener"
+      
+    - name: "Structured Logging"
+      description: "JSONL format logs for AI analysis"
+      format: "One JSON object per line with test events"
+      fields:
+        - "timestamp"
+        - "test_name"
+        - "class_name"
+        - "status (STARTED/PASSED/FAILED)"
+        - "message"
+        - "duration_ms"
+        - "stacktrace"
+        
+    - name: "Allure Reporting"
+      description: "Rich HTML reports with attachments"
+      
+  ai_analysis:
+    - name: "Local AI Embeddings"
+      description: "Sentence-Transformers running 100% locally"
+      model: "all-MiniLM-L6-v2"
+      dimensions: 384
+      privacy: "No data leaves machine"
+      
+    - name: "Semantic Similarity Search"
+      description: "Find similar failures by meaning, not keywords"
+      algorithm: "Cosine similarity on embeddings"
+      
+    - name: "Vector Database"
+      description: "Qdrant in-memory for fast similarity search"
+      
+    - name: "Interactive Dashboard"
+      description: "Streamlit UI with metrics, charts, search"
+      pages:
+        - "Dashboard - Overview metrics and charts"
+        - "Test Events - Full event list with filters"
+        - "Failures - Detailed failure analysis"
+        - "Similar Search - AI-powered similarity search"
+        - "Analytics - Trends and statistics"
+
+# =============================================================================
+# COMMANDS
+# =============================================================================
+commands:
+  setup:
+    install_java_mac: "brew install openjdk@17"
+    install_java_ubuntu: "sudo apt install openjdk-17-jdk"
+    setup_python_venv: "cd ai-analysis && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt"
+    
+  run_tests:
+    all_tests: "./mvnw clean test"
+    specific_class: "./mvnw test -Dtest=LoginTest"
+    with_allure: "./mvnw clean test allure:serve"
+    
+  ai_analysis:
+    start_dashboard: "cd ai-analysis && source venv/bin/activate && streamlit run dashboard.py"
+    start_api: "cd ai-analysis && source venv/bin/activate && python main.py serve"
+    run_analysis: "cd ai-analysis && source venv/bin/activate && python main.py analyze"
+
+# =============================================================================
+# TEST SITE
+# =============================================================================
+test_site:
+  url: "https://practicetestautomation.com/practice-test-login/"
+  credentials:
+    username: "student"
+    password: "Password123"
+  pages:
+    login: "/practice-test-login/"
+    dashboard: "/logged-in-successfully/"
+

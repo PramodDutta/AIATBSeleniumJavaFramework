@@ -1,0 +1,29 @@
+# AI Test Analysis Pipeline Dependencies
+
+# Core
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.5.0
+python-dotenv>=1.0.0
+
+# Embeddings & ML
+sentence-transformers>=2.2.0
+torch>=2.0.0
+
+# Vector Database
+qdrant-client>=1.7.0
+
+# RAG Pipeline (Haystack)
+haystack-ai>=2.0.0
+
+# Log Processing
+pandas>=2.1.0
+
+# HTTP Client
+httpx>=0.25.0
+aiofiles>=23.2.0
+
+# Utilities
+tqdm>=4.66.0
+numpy>=1.24.0
+

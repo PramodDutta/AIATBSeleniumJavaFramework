@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Selenium POM Framework Test Suite" parallel="none" verbose="2">
+
+    <listeners>
+        <listener class-name="io.qameta.allure.testng.AllureTestNg"/>
+        <listener class-name="com.automation.listeners.AllureScreenshotListener"/>
+        <listener class-name="com.automation.analytics.TestAnalyticsListener"/>
+    </listeners>
+
+    <test name="Login Tests - Chrome">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.automation.tests.LoginTest"/>
+        </classes>
+    </test>
+
+</suite>
+
