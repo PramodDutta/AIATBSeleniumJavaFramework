@@ -39,6 +39,18 @@
 - ✅ **Automatic Screenshots** - Captures screenshots, page source, and URL on test failure
 - ✅ **Structured Logging** - JSONL format logs for AI analysis
 
+### Cloud Testing Platforms
+- ☁️ **BrowserStack Integration** - Run tests on 3000+ real browsers and devices
+- ☁️ **LambdaTest Integration** - Scalable cross-browser testing in the cloud
+- 🖥️ **Local Execution** - Run tests locally with Chrome, Firefox, or Edge
+- 🔄 **Easy Switching** - Switch between local/cloud with a single parameter
+
+### CI/CD Integration
+- 🔧 **Jenkins Pipeline** - Ready-to-use Jenkinsfile with all stages
+- 📦 **Parameterized Builds** - Configure browser, environment, and test suite
+- 📊 **Allure Reports in Jenkins** - Integrated reporting with trend analysis
+- 🤖 **AI Report Generation** - Automatic AI analysis report in CI pipeline
+
 ### AI Analysis Pipeline (Python)
 - 🧠 **Local AI Embeddings** - Sentence-Transformers running 100% locally
 - 🔍 **Semantic Similarity Search** - Find similar failures by meaning, not just keywords
@@ -220,14 +232,39 @@ chmod +x mvnw
 ### Step 3: Run Tests
 
 ```bash
-# Run all tests
+# Run all tests locally
 ./mvnw clean test
 
 # Run specific test class
 ./mvnw test -Dtest=LoginTest
 
-# Run with specific browser (if configured)
+# Run with specific browser
 ./mvnw test -Dbrowser=firefox
+
+# Run in headless mode (for CI)
+./mvnw test -Dheadless=true
+```
+
+### Step 3.1: Run on BrowserStack
+
+```bash
+# Set credentials (or use .env file)
+export BROWSERSTACK_USERNAME=your_username
+export BROWSERSTACK_ACCESS_KEY=your_access_key
+
+# Run tests on BrowserStack
+./mvnw test -Dexecution.env=browserstack -Dbrowser=chrome
+```
+
+### Step 3.2: Run on LambdaTest
+
+```bash
+# Set credentials (or use .env file)
+export LAMBDATEST_USERNAME=your_username
+export LAMBDATEST_ACCESS_KEY=your_access_key
+
+# Run tests on LambdaTest
+./mvnw test -Dexecution.env=lambdatest -Dbrowser=chrome
 ```
 
 ### Step 4: View Allure Report
@@ -527,6 +564,116 @@ public class NewTest extends BaseTest {
     }
 }
 ```
+
+---
+
+## 🔧 Jenkins CI/CD Integration
+
+### Jenkinsfile Features
+
+The included `Jenkinsfile` provides a complete CI/CD pipeline:
+
+```
+┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+│  Checkout   │───▶│    Build    │───▶│  Run Tests  │───▶│   Allure    │───▶│ AI Analysis │
+│             │    │   Compile   │    │  (Params)   │    │   Report    │    │   Report    │
+└─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘
+```
+
+### Pipeline Parameters
+
+| Parameter | Options | Description |
+|-----------|---------|-------------|
+| `BROWSER` | chrome, firefox, edge | Browser for test execution |
+| `EXECUTION_ENV` | local, browserstack, lambdatest | Test execution environment |
+| `TEST_SUITE` | testng.xml | TestNG suite file |
+| `GENERATE_AI_REPORT` | true/false | Generate AI analysis report |
+
+### Jenkins Setup
+
+1. **Install Required Plugins:**
+   - Allure Jenkins Plugin
+   - Pipeline Plugin
+   - Credentials Plugin
+
+2. **Configure Credentials:**
+   ```
+   Jenkins → Manage Jenkins → Credentials → Add:
+   - browserstack-username (Secret text)
+   - browserstack-access-key (Secret text)
+   - lambdatest-username (Secret text)
+   - lambdatest-access-key (Secret text)
+   ```
+
+3. **Configure Tools:**
+   ```
+   Jenkins → Global Tool Configuration:
+   - JDK17 (Java 17)
+   - Maven3 (Maven 3.8+)
+   ```
+
+4. **Create Pipeline Job:**
+   - New Item → Pipeline
+   - Pipeline → Definition: Pipeline script from SCM
+   - SCM: Git → Repository URL: your-repo-url
+   - Script Path: Jenkinsfile
+
+### Running Pipeline
+
+```bash
+# Trigger with default parameters
+# Or use Jenkins UI to customize:
+# - Browser: chrome/firefox/edge
+# - Environment: local/browserstack/lambdatest
+# - AI Report: enabled/disabled
+```
+
+---
+
+## ☁️ Cloud Testing Configuration
+
+### BrowserStack Setup
+
+1. **Get Credentials:** https://www.browserstack.com/accounts/settings
+
+2. **Set Environment Variables:**
+   ```bash
+   export BROWSERSTACK_USERNAME=your_username
+   export BROWSERSTACK_ACCESS_KEY=your_access_key
+   ```
+
+3. **Run Tests:**
+   ```bash
+   ./mvnw test -Dexecution.env=browserstack -Dbrowser=chrome
+   ```
+
+4. **View Results:** https://automate.browserstack.com/dashboard
+
+### LambdaTest Setup
+
+1. **Get Credentials:** https://accounts.lambdatest.com/detail/profile
+
+2. **Set Environment Variables:**
+   ```bash
+   export LAMBDATEST_USERNAME=your_username
+   export LAMBDATEST_ACCESS_KEY=your_access_key
+   ```
+
+3. **Run Tests:**
+   ```bash
+   ./mvnw test -Dexecution.env=lambdatest -Dbrowser=firefox
+   ```
+
+4. **View Results:** https://automation.lambdatest.com/timeline
+
+### Cloud Capabilities
+
+Both platforms are configured with:
+- Video recording of test execution
+- Network logs capture
+- Console logs capture
+- Screenshot on failure
+- Selenium 4.27 support
 
 ---
 

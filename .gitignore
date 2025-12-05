@@ -16,9 +16,14 @@ target/
 .project
 .classpath
 .settings/
+*.swp
+*.swo
+*~
 
 # Allure
 .allure/
+allure-results/
+allure-report/
 
 # Python
 ai-analysis/venv/
@@ -38,12 +43,51 @@ ai-analysis/data/*.db
 # OS
 .DS_Store
 Thumbs.db
+ehthumbs.db
 
 # Logs
 *.log
 logs/
 
-# Environment
+# Environment & Secrets (NEVER commit these!)
 .env
 .env.local
+.env.*.local
+*.env
+
+# Cloud Testing Credentials
+browserstack.yml
+lambdatest.yml
+cloud-config.properties
+
+# Jenkins
+.jenkins/
+jenkins-workspace/
+
+# Test Results
+test-output/
+test-results/
+screenshots/
+videos/
+
+# Selenium
+*.png
+geckodriver.log
+chromedriver.log
+
+# Coverage
+coverage/
+*.lcov
+.nyc_output/
+
+# Node (if using any JS tools)
+node_modules/
+package-lock.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
 
